@@ -1,28 +1,46 @@
 import pytest
-# TODO: add necessary import
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from ml.model import compute_model_metrics, inference, train_model
 
-# TODO: implement the first test. Change the function name and input as needed
-def test_one():
+def test_compute_model_metrics():
     """
-    # add description for the first test
+    Test that compute_model_metrics correctly computes precision, recall, and fbeta.
     """
-    # Your code here
-    pass
+    y_true = np.array([1, 0, 1, 1, 0, 0])
+    y_pred = np.array([1, 0, 1, 0, 0, 0])
+    
+    precision, recall, fbeta = compute_model_metrics(y_true, y_pred)
+    
+    assert isinstance(precision, float)
+    assert isinstance(recall, float)
+    assert isinstance(fbeta, float)
+    assert precision == 1.0
+    assert recall == 2.0 / 3.0
+    assert fbeta > 0.0
 
+def test_train_model():
+    """
+    Test that train_model returns a trained RandomForestClassifier instance.
+    """
+    X_train = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])
+    y_train = np.array([0, 0, 1, 1])
+    
+    model = train_model(X_train, y_train)
+    
+    assert isinstance(model, RandomForestClassifier)
+    assert hasattr(model, "classes_")
 
-# TODO: implement the second test. Change the function name and input as needed
-def test_two():
+def test_inference():
     """
-    # add description for the second test
+    Test that inference returns predictions of the expected type and shape.
     """
-    # Your code here
-    pass
-
-
-# TODO: implement the third test. Change the function name and input as needed
-def test_three():
-    """
-    # add description for the third test
-    """
-    # Your code here
-    pass
+    X_train = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])
+    y_train = np.array([0, 0, 1, 1])
+    model = train_model(X_train, y_train)
+    
+    X_test = np.array([[2, 3], [6, 7]])
+    preds = inference(model, X_test)
+    
+    assert isinstance(preds, np.ndarray)
+    assert len(preds) == len(X_test)
