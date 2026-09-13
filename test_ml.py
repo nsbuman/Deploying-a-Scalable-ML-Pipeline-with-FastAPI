@@ -10,9 +10,9 @@ def test_compute_model_metrics():
     """
     y_true = np.array([1, 0, 1, 1, 0, 0])
     y_pred = np.array([1, 0, 1, 0, 0, 0])
- 
+
     precision, recall, fbeta = compute_model_metrics(y_true, y_pred)
-  
+
     assert isinstance(precision, float)
     assert isinstance(recall, float)
     assert isinstance(fbeta, float)
