@@ -17,7 +17,7 @@ def test_compute_model_metrics():
     assert isinstance(fbeta, float)
     assert precision == 1.0
     assert recall == 2.0 / 3.0
-    assert fbeta > 0.0
+    assert fbeta == pytest.approx(0.8)
 
 def test_train_model():
     """
