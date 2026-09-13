@@ -1,5 +1,3 @@
-import json
-
 import requests
 
 # Send a GET using the URL http://127.0.0.1:8000
@@ -9,8 +7,6 @@ r = requests.get("http://127.0.0.1:8000")
 print("GET Status Code:", r.status_code)
 # Print the welcome message
 print("GET Response:", r.json()['message'])
-
-
 
 data = {
     "age": 37,

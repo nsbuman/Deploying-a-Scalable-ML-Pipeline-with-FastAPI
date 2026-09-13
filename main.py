@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 from ml.data import apply_label, process_data
 from ml.model import inference, load_model
 
+
 # DO NOT MODIFY
 class Data(BaseModel):
     age: int = Field(..., example=37)
@@ -26,6 +27,7 @@ class Data(BaseModel):
     hours_per_week: int = Field(..., example=40, alias="hours-per-week")
     native_country: str = Field(..., example="United-States", alias="native-country")
 
+
 path = os.path.join("model", "encoder.pkl")
 encoder = load_model(path)
 
@@ -38,6 +40,7 @@ app = FastAPI(
     description="API for predicting whether income exceeds $50K/year using a trained Random Forest model.",
     version="1.0.0",
 )
+
 
 # Create a GET on the root giving a welcome message
 @app.get("/")
